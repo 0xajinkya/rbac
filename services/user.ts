@@ -69,7 +69,7 @@ const Create = async (data: IUserCreate, options?: IPrismaOptions) => {
 
 const Get = async (identifier: string, options?: IPrismaOptions) => {
     const transaction = await Database.getTransaction(options);
-    const response = await transaction.user.findFirst({
+    let response = await transaction.user.findFirst({
         where: {
             OR: [
                 {
@@ -127,7 +127,43 @@ const Update = async (id: string, data: IUserUpdate, options?: IPrismaOptions) =
 }
 
 export const UserService = {
+    /**
+     * Creates a new user in the database.
+     * 
+     * @function Create
+     * @async
+     * @param {IUserCreate} data - The user details for creating a new user.
+     * @param {IPrismaOptions} [options] - Optional database transaction options.
+     * 
+     * @throws {SchemaValidationError} - If the email is invalid.
+     * @throws {PlatformError} - If the email already exists or schema validation fails.
+     * 
+     * @returns {Promise<IUser>} - The newly created user object.
+     */
     Create,
+    /**
+     * Retrieves a user by ID or email.
+     * 
+     * @function Get
+     * @async
+     * @param {string} identifier - The user ID or email address.
+     * @param {IPrismaOptions} [options] - Optional database transaction options.
+     * 
+     * @returns {Promise<IUser|null>} - The user object if found, or `null` if not found.
+     */
     Get,
+    /**
+     * Updates an existing user in the database.
+     * 
+     * @function Update
+     * @async
+     * @param {string} id - The ID of the user to update.
+     * @param {IUserUpdate} data - The user fields to update.
+     * @param {IPrismaOptions} [options] - Optional database transaction options.
+     * 
+     * @throws {PlatformError} - If the user does not exist.
+     * 
+     * @returns {Promise<IUser>} - The updated user object.
+     */
     Update
 }

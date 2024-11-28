@@ -14,3 +14,9 @@ AuthRouter.post(
     //@ts-ignore
     AuthController.SignIn
 );
+
+AuthRouter.post(
+    "/signout",
+    //@ts-ignore
+    AuthController.SignOut
+)

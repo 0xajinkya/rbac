@@ -10,7 +10,7 @@ const SignUp = async (req: Request, res: Response) => {
         return cookieResponse.json(response.content);
     }
     return res.json(response);
-}
+};
 
 const SignIn = async (req: Request, res: Response) => {
     const response = await AuthService.SignIn(req.body);
@@ -20,9 +20,55 @@ const SignIn = async (req: Request, res: Response) => {
         return cookieResponse.json(response.content);
     }
     throw new PlatformError('RefreshAgain');
-}
+};
+
+const SignOut = async (req: Request, res: Response) => {
+    const cookieResponse = AuthService.clearCookie(res);
+
+    return cookieResponse.json({
+        status: true,
+    });
+};
+
 
 export const AuthController = {
+    /**
+     * Handles user sign-up requests.
+     * 
+     * @function SignUp
+     * @async
+     * @param {Request} req - The HTTP request object containing user registration data in the body.
+     * @param {Response} res - The HTTP response object to send the result.
+     * 
+     * @returns {Promise<Response>} - JSON response containing user registration data or error details.
+     * - If `meta` is present in the response, a cookie is created and included in the response.
+     * - Otherwise, returns the response as JSON.
+    */
     SignUp,
-    SignIn
+    /**
+     * Handles user sign-in requests.
+     * 
+     * @function SignIn
+     * @async
+     * @param {Request} req - The HTTP request object containing user login credentials in the body.
+     * @param {Response} res - The HTTP response object to send the result.
+     * 
+     * @throws {PlatformError} - Throws 'RefreshAgain' error if authentication requires a refresh.
+     * @returns {Promise<Response>} - JSON response containing user authentication data or error details.
+     * - If `meta` is present in the response, a cookie is created and included in the response.
+     * - Otherwise, throws an error.
+    */
+    SignIn,
+    /**
+     * Handles user sign-out requests.
+     * 
+     * @function SignOut
+     * @async
+     * @param {Request} req - The HTTP request object (unused in this handler).
+     * @param {Response} res - The HTTP response object to send the result.
+     * 
+     * @returns {Promise<Response>} - JSON response indicating sign-out success and clearing cookies.
+     * - The response contains `{ status: true }` and clears any authentication-related cookies.
+    */
+    SignOut
 };

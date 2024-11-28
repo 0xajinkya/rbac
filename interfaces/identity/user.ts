@@ -9,6 +9,16 @@ export interface IUser {
     active_organization_id: string | null;
 }
 
+export interface IUserWithoutPassword {
+    id: string;
+    first_name?: string | null;
+    last_name?: string | null;
+    email: string;
+    created_at: Date;
+    updated_at: Date;
+    active_organization_id: string | null;
+}
+
 export type IUserUpdate = Omit<Partial<IUser>, "id" | "email">;
 
 export interface IUserCreate extends IUserUpdate {

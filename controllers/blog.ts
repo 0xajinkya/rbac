@@ -122,12 +122,138 @@ const Review = async (request: Request, response: Response) => {
     })
 };
 
+const List = async (request: Request, response: Response) => {
+    const {
+        where,
+        include,
+        order,
+        limit,
+        skip
+    } = request.body;
+    const blogs = await BlogService.List({
+        where,
+        include,
+        order,
+        limit,
+        skip
+    });
+    return response.status(200).json({
+        staus: true,
+        content: {
+            data: blogs
+        }
+    })
+}
+
+const Get = async (request: Request, response: Response) => {
+    const {
+        id
+    } = request.params;
+    const blog = await BlogService.Get(id);
+    return response.status(200).json({
+        staus: true,
+        content: {
+            data: blog
+        }
+    })
+}
 
 export const BlogController = {
+    /**
+     * Creates a new blog post with the provided title and content.
+     * 
+     * @function Create
+     * @async
+     * @param {Request} request - The request object containing the blog data in the body.
+     * @param {Response} response - The response object to send the result back to the client.
+     * @returns {Response} - A JSON response with the created blog data.
+     * 
+     * @throws {PlatformError} - Throws an error if creation fails.
+    */
     Create,
+    /**
+     * Publishes a blog post by its ID.
+     * 
+     * @function Publish
+     * @async
+     * @param {Request} request - The request object containing the blog ID in the params.
+     * @param {Response} response - The response object to send the result back to the client.
+     * @returns {Response} - A JSON response with the published blog data.
+     * 
+     * @throws {PlatformError} - Throws an error if publication fails.
+    */
     Publish,
+    
+    /**
+     * Unpublishes a blog post by its ID.
+     * 
+     * @function UnPublish
+     * @async
+     * @param {Request} request - The request object containing the blog ID in the params.
+     * @param {Response} response - The response object to send the result back to the client.
+     * @returns {Response} - A JSON response with the unpublished blog data.
+     * 
+     * @throws {PlatformError} - Throws an error if unpublishing fails.
+    */
     UnPublish,
+    /**
+     * Updates a blog post with the new content, title, and published status.
+     * 
+     * @function Update
+     * @async
+     * @param {Request} request - The request object containing the blog ID in the params and updated data in the body.
+     * @param {Response} response - The response object to send the result back to the client.
+     * @returns {Response} - A JSON response with the updated blog data.
+     * 
+     * @throws {PlatformError} - Throws an error if update fails.
+    */
     Update,
+    /**
+     * Adds a comment to a blog post by its ID.
+     * 
+     * @function Comment
+     * @async
+     * @param {Request} request - The request object containing the blog ID in the params and comment data in the body.
+     * @param {Response} response - The response object to send the result back to the client.
+     * @returns {Response} - A JSON response with the created comment data.
+     * 
+     * @throws {PlatformError} - Throws an error if comment creation fails.
+    */
     Comment,
-    Review
+    /**
+     * Adds a review to a blog post by its ID.
+     * 
+     * @function Review
+     * @async
+     * @param {Request} request - The request object containing the blog ID in the params and review data in the body.
+     * @param {Response} response - The response object to send the result back to the client.
+     * @returns {Response} - A JSON response with the created review data.
+     * 
+     * @throws {PlatformError} - Throws an error if review creation fails.
+    */
+    Review,
+    /**
+     * Lists all blog posts with optional filters and pagination.
+     * 
+     * @function List
+     * @async
+     * @param {Request} request - The request object containing filters, sorting, and pagination options in the body.
+     * @param {Response} response - The response object to send the result back to the client.
+     * @returns {Response} - A JSON response with the list of blog posts.
+     * 
+     * @throws {PlatformError} - Throws an error if fetching the list fails.
+    */
+    List,
+    /**
+     * Retrieves a single blog post by its ID.
+     * 
+     * @function Get
+     * @async
+     * @param {Request} request - The request object containing the blog ID in the params.
+     * @param {Response} response - The response object to send the result back to the client.
+     * @returns {Response} - A JSON response with the blog data.
+     * 
+     * @throws {PlatformError} - Throws an error if the blog is not found.
+    */
+    Get
 }

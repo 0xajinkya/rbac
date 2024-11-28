@@ -2,7 +2,6 @@ import { scopes } from "@config/constants";
 import { BlogController } from "@controllers/blog";
 import { AuthHandlerMiddleware } from "@middlewares/auth-handler";
 import { ScopeHandlerMiddleware } from "@middlewares/scope-handler";
-import { CommentService } from "@services/comment";
 import { Router } from "express";
 
 export const BlogRouter = Router();
@@ -15,6 +14,18 @@ BlogRouter.post(
     ],
     //@ts-ignore
     BlogController.Create
+);
+
+BlogRouter.post(
+    "/query",
+    //@ts-ignore
+    BlogController.List
+);
+
+BlogRouter.get(
+    "/:id",
+    //@ts-ignore
+    BlogController.Get
 );
 
 BlogRouter.put(
@@ -51,7 +62,7 @@ BlogRouter.post(
     "/:id/comment",
     [
         AuthHandlerMiddleware(),
-        ScopeHandlerMiddleware(scopes.blog.comment)
+        // ScopeHandlerMiddleware(scopes.blog.comment)
     ],
     //@ts-ignore
     BlogController.Comment

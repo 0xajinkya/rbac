@@ -41,5 +41,12 @@ const Create = async (request: Request, response: Response) => {
 
 
 export const OrganizationController = {
+    /**
+     * Creates a new organization and adds the super admin user, updates their active organization, and generates authentication tokens.
+     * 
+     * @param {Request} request - The HTTP request containing the organization name in the body.
+     * @param {Response} response - The HTTP response object where the result is sent.
+     * @returns {Response} - The response with the status and organization data.
+    */
     Create,
 }

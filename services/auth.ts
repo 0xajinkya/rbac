@@ -1,4 +1,4 @@
-import type { IUser, IUserCreate } from "@interfaces/identity"
+import type { IUser, IUserCreate, IUserWithoutPassword } from "@interfaces/identity"
 import type { IPrismaOptions } from "@interfaces/prisma";
 import { envconfig } from "@libraries/envconfig";
 import { helper } from "@libraries/helper";
@@ -31,7 +31,7 @@ const expiresIn = {
     refresh_token: ms(envconfig.authentication.jwt.refresh_expires_in || '30d')
 };
 
-const SignUp = async (data: IUserCreate, options?: IPrismaOptions): Promise<IResponse<IUser, {
+const SignUp = async (data: IUserCreate, options?: IPrismaOptions): Promise<IResponse<IUserWithoutPassword, {
     access_token: string;
     refresh_token: string;
 }>> => {
@@ -41,11 +41,14 @@ const SignUp = async (data: IUserCreate, options?: IPrismaOptions): Promise<IRes
         throw new PlatformError('SomethingWentWrong');
     }
     const token = createToken(response);
-
+    const {
+        password,
+        ...user
+    } = response;
     return {
         status: true,
         content: {
-            data: response,
+            data: user,
             meta: token
         }
     };
@@ -167,10 +170,101 @@ const createCookie = (response: Response, data: {
     return response;
 }
 
+const clearCookie = (response: Response) => {
+    const cookies = [
+        AuthHelperService.cookieKeys.access_token,
+        AuthHelperService.cookieKeys.refresh_token,
+    ];
+
+    if (envconfig.env === 'production') {
+        cookies.push('production_access_token');
+        cookies.push('production_refresh_token');
+    }
+
+    // Iterate through each cookie and clear them from the response object
+    for (const cookie of cookies) {
+        response.clearCookie(cookie, COOKIE_OPTIONS);
+    }
+
+    // Return the response object with the cookies cleared
+    return response;
+}
+
 export const AuthService = {
+    /**
+     * Registers a new user and generates authentication tokens.
+     * 
+     * @function SignUp
+     * @async
+     * @param {IUserCreate} data - The user details required for registration.
+     * @param {IPrismaOptions} [options] - Optional database options for the operation.
+     * 
+     * @throws {PlatformError} - If user creation fails or an unexpected error occurs.
+     * 
+     * @returns {Promise<IResponse<IUserWithoutPassword, { access_token: string, refresh_token: string }>>} 
+     * - The response object contains user data (excluding the password) and authentication tokens.
+    */
     SignUp,
+    /**
+     * Authenticates a user and generates authentication tokens.
+     * 
+     * @function SignIn
+     * @async
+     * @param {Object} data - The user credentials for login.
+     * @param {string} data.email - The user's email address.
+     * @param {string} data.password - The user's password.
+     * 
+     * @throws {SchemaValidationError} - If the email format is invalid.
+     * @throws {PlatformError} - If the user is not found or the credentials are invalid.
+     * 
+     * @returns {Promise<IResponse<IUser, { access_token: string, refresh_token: string }>>}
+     * - The response object contains user data and authentication tokens.
+    */
     SignIn,
+    /**
+     * Creates JWT tokens for a user.
+     * 
+     * @function createToken
+     * @param {IUser} user - The user object.
+     * 
+     * @throws {PlatformError} - If the user object is not provided.
+     * 
+     * @returns {{ access_token: string, refresh_token: string }} - The generated JWT tokens.
+    */
     createToken,
+    /**
+     * Sets authentication cookies on the response object.
+     * 
+     * @function createCookie
+     * @param {Response} response - The HTTP response object.
+     * @param {Object} data - The tokens to be set in the cookies.
+     * @param {string|null} data.access_token - The access token.
+     * @param {string|null} data.refresh_token - The refresh token.
+     * 
+     * @returns {Response} - The response object with cookies set.
+    */
     createCookie,
-    verifyPassword
+    /**
+     * Verifies a user's password against a stored hash.
+     * 
+     * @function verifyPassword
+     * @async
+     * @param {string} hash - The stored password hash.
+     * @param {string} [password] - The plaintext password to verify.
+     * 
+     * @throws {PlatformError} - If the credentials are invalid.
+     * @throws {SchemaValidationError} - If no password is provided.
+     * 
+     * @returns {Promise<boolean>} - `true` if the password is valid, otherwise an error is thrown.
+    */
+    verifyPassword,
+    /**
+     * Clears authentication cookies from the response object.
+     * 
+     * @function clearCookie
+     * @param {Response} response - The HTTP response object.
+     * 
+     * @returns {Response} - The response object with cookies cleared.
+    */
+    clearCookie
 }

@@ -39,6 +39,28 @@ const Review = async (data: IBlogReviewInput, options?: IPrismaOptions) => {
 }
 
 export const CommentService = {
+    /**
+     * Creates a new comment on a blog post.
+     * 
+     * @function Create
+     * @async
+     * @param {IBlogCommentInput} data - The input data for the comment (comment text, associated blog ID).
+     * @param {IPrismaOptions} options - Optional Prisma transaction options.
+     * @returns {Promise<BlogComment>} - The created comment.
+     * 
+     * @throws {PlatformError} - Throws an error if creation fails.
+    */
     Create,
+    /**
+     * Creates a new review for a blog post.
+     * 
+     * @function Review
+     * @async
+     * @param {IBlogReviewInput} data - The input data for the review (review text, associated blog ID).
+     * @param {IPrismaOptions} options - Optional Prisma transaction options.
+     * @returns {Promise<BlogReview>} - The created review.
+     * 
+     * @throws {PlatformError} - Throws an error if creation fails.
+    */
     Review
 }

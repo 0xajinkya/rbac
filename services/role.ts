@@ -32,6 +32,26 @@ const hasScope = ({ role, scope }: { role: any, scope: string }) => {
 }
 
 export const RoleService = {
+    /**
+     * Retrieves a role from the database by its ID.
+     * 
+     * @function Get
+     * @async
+     * @param {Roles} role - The role ID to fetch.
+     * @param {IPrismaOptions} options - Optional Prisma transaction options.
+     * @returns {Promise<Role | null>} - The role object or null if not found.
+     * 
+     * @throws {PlatformError} - Throws an error if the role retrieval fails.
+    */
     Get,
+    /**
+     * Checks if a role has the required scope (permission).
+     * 
+     * @function hasScope
+     * @param {Object} params - The parameters for permission checking.
+     * @param {any} params.role - The role for which to check permission.
+     * @param {string} params.scope - The scope (permission) to check.
+     * @returns {boolean} - Returns true if the role has permission for the scope, otherwise false.
+    */
     hasScope
 }

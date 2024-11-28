@@ -102,7 +102,37 @@ const hasAccess = async ({
 }
 
 export const StaffService = {
+    /**
+     * Adds a user to an organization with a specific role.
+     * 
+     * @param {Object} params - The parameters for adding staff.
+     * @param {string} params.userId - The user ID to be added as staff.
+     * @param {Roles} params.roleId - The role ID for the staff member.
+     * @param {string} params.organizationId - The organization ID to which the staff member will belong.
+     * @param {IPrismaOptions} options - Optional Prisma transaction options.
+     * @returns {Promise<IStaff>} - The newly created staff record.
+     * 
+     * @throws {PlatformError} - Throws an error if the role, user, or organization is not found, or if the staff member already exists.
+    */
     Add,
+    /**
+     * Checks if the authenticated user has access to the specified organization.
+     * 
+     * @param {Object} params - The parameters for checking access.
+     * @param {string} params.organization_id - The organization ID to check access for.
+     * @param {string} [params.scope] - Optional scope for further permission validation.
+     * @param {IPrismaOptions} options - Optional Prisma transaction options.
+     * @returns {Promise<IStaff>} - The staff record with the associated role and access details.
+     * 
+     * @throws {PlatformError} - Throws an error if the user is not found or does not have access.
+    */
     hasAccess,
+    /**
+     * Retrieves a staff member's details by their ID.
+     * 
+     * @param {string} id - The ID of the staff member to fetch.
+     * @param {IPrismaOptions} options - Optional Prisma transaction options.
+     * @returns {Promise<IStaff | null>} - The staff member details or null if not found.
+    */
     Get
 }

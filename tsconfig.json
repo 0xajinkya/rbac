@@ -26,12 +26,6 @@
       "@controllers/*": [
         "controllers/*"
       ],
-      "@cron/*": [
-        "cron/*"
-      ],
-      "@emitters/*": [
-        "emitters/*"
-      ],
       "@interfaces/*": [
         "interfaces/*"
       ],
@@ -41,23 +35,11 @@
       "@loaders/*": [
         "loaders/*"
       ],
-      "@models/*": [
-        "models/*"
-      ],
       "@middlewares/*": [
         "universe/middlewares/*"
       ],
-      "@schema/*": [
-        "schema/*"
-      ],
       "@services/*": [
         "services/*"
-      ],
-      "@subscribers/*": [
-        "subscribers/*"
-      ],
-      "@tests/*": [
-        "tests/*"
       ],
       "@universe/*": [
         "universe/*"

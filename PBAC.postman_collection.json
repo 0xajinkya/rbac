@@ -1,0 +1,1732 @@
+{
+	"info": {
+		"_postman_id": "df667003-b130-4f77-b992-98ba944fe091",
+		"name": "RBAC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27359911"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "SIgn Up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"superadmin@mailinator.com\",\n    \"password\": \"Password@123\",\n    \"first_name\": \"Super\",\n    \"last_name\": \"Admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/v1/auth/signup",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Admin Sign Up",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"admin@mailinator.com\",\n    \"password\": \"Password@123\",\n    \"first_name\": \"Admin\",\n    \"last_name\": \"Only\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/v1/auth/signup",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Super Admin Signup",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"superadmin@mailinator.com\",\n    \"password\": \"Password@123\",\n    \"first_name\": \"Super\",\n    \"last_name\": \"Admin\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/v1/auth/signup",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, X-Org"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT,POST,GET,DELETE,OPTIONS"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains; preload"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "development_access_token=eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb250ZW50Ijp7ImRhdGEiOnsiaWQiOiI3MjY3NzY3MzM1OTU3ODMxNDM3IiwiZW1haWwiOiJzdXBlcmFkbWluQG1haWxpbmF0b3IuY29tIiwiYWN0aXZlX29yZ2FuaXphdGlvbl9pZCI6bnVsbCwiZmlyc3RfbmFtZSI6IlN1cGVyIiwibGFzdF9uYW1lIjoiQWRtaW4ifX0sImlhdCI6MTczMjc3MDc2MSwiZXhwIjoxNzM1MzYyNzYxLCJzdWIiOiI3MjY3NzY3MzM1OTU3ODMxNDM3IiwianRpIjoiNzI2Nzc2NzMzNjIyNjM1MzUzMiJ9.r_tcUlUUlUImt-HKjrBNkgJB4w0aWCOwJdD_osYChbb8uCiSeJXXlTRAPwvaVWBQux8YVd70C168AuYqCpjkPg; Max-Age=18000; Domain=localhost; Path=/; Expires=Thu, 28 Nov 2024 10:12:41 GMT; HttpOnly; SameSite=Lax"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "development_refresh_token=eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb250ZW50Ijp7ImRhdGEiOnsiaWQiOiI3MjY3NzY3MzM1OTU3ODMxNDM3IiwiZW1haWwiOiJzdXBlcmFkbWluQG1haWxpbmF0b3IuY29tIiwiYWN0aXZlX29yZ2FuaXphdGlvbl9pZCI6bnVsbCwiZmlyc3RfbmFtZSI6IlN1cGVyIiwibGFzdF9uYW1lIjoiQWRtaW4ifX0sImlhdCI6MTczMjc3MDc2MSwiZXhwIjoxNzM1MzYyNzYxLCJzdWIiOiI3MjY3NzY3MzM1OTU3ODMxNDM3IiwianRpIjoiNzI2Nzc2NzMzNjI0MDgwMDc2NSJ9.nrv-0prAL15wjFf1T0oGR6FsVmGL4YRm56IV255pAIz9Tib80Na2goC5imYISt-zhgdzFQiFTBMa2S8GhPPN3A; Max-Age=2592000; Domain=localhost; Path=/; Expires=Sat, 28 Dec 2024 05:12:41 GMT; HttpOnly; SameSite=Lax"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "314"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"13a-RogqMBFDIxqOXTjHXx8JbkKdJX0\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 28 Nov 2024 05:12:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": \"7267767335957831437\",\n        \"first_name\": \"Super\",\n        \"last_name\": \"Admin\",\n        \"email\": \"superadmin@mailinator.com\",\n        \"password\": \"$2b$10$eN2q9NldilYNEyqGdHd3secDPr.YTQSORq96x01kwkbCjQbd9Unz6\",\n        \"created_at\": \"2024-11-28T05:12:41.540Z\",\n        \"updated_at\": \"2024-11-28T05:12:41.540Z\",\n        \"deleted\": false,\n        \"active_organization_id\": null\n    }\n}"
+						},
+						{
+							"name": "Editor Signup",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"editor@mailinator.com\",\n    \"password\": \"Password@123\",\n    \"first_name\": \"Editor\",\n    \"last_name\": \"Only\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/v1/auth/signup",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Reviewer Sign Up",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"reviewer@mailinator.com\",\n    \"password\": \"Password@123\",\n    \"first_name\": \"Reviewer\",\n    \"last_name\": \"Only\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/v1/auth/signup",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Normal SIgn Up",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"user@mailinator.com\",\n    \"password\": \"Password@123\",\n    \"first_name\": \"Normal\",\n    \"last_name\": \"User\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/v1/auth/signup",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "SIgn Up",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"test@mailinator.com\",\n    \"password\": \"Password@123\",\n    \"first_name\": \"Super\",\n    \"last_name\": \"Admin\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/v1/auth/signup",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, X-Org"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT,POST,GET,DELETE,OPTIONS"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains; preload"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "development_access_token=eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb250ZW50Ijp7ImRhdGEiOnsiaWQiOiI3MjY3OTIwMDY4MjU5MDM1ODI2IiwiZW1haWwiOiJ0ZXN0QG1haWxpbmF0b3IuY29tIiwiYWN0aXZlX29yZ2FuaXphdGlvbl9pZCI6bnVsbCwiZmlyc3RfbmFtZSI6IlN1cGVyIiwibGFzdF9uYW1lIjoiQWRtaW4ifX0sImlhdCI6MTczMjgwNzE3NSwiZXhwIjoxNzM1Mzk5MTc1LCJzdWIiOiI3MjY3OTIwMDY4MjU5MDM1ODI2IiwianRpIjoiNzI2NzkyMDA2ODU4ODcwMzQwMCJ9.s2hz_kqbyXuAcAXypeTTQu4dHXLiGn8GEYk5LZcAo9VG33JcM6ij5OEqD5l_BSDnuuoQYH3Z4uXMVEPtGNruxQ; Max-Age=18000; Domain=localhost; Path=/; Expires=Thu, 28 Nov 2024 20:19:35 GMT; HttpOnly; SameSite=Lax"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "development_refresh_token=eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb250ZW50Ijp7ImRhdGEiOnsiaWQiOiI3MjY3OTIwMDY4MjU5MDM1ODI2IiwiZW1haWwiOiJ0ZXN0QG1haWxpbmF0b3IuY29tIiwiYWN0aXZlX29yZ2FuaXphdGlvbl9pZCI6bnVsbCwiZmlyc3RfbmFtZSI6IlN1cGVyIiwibGFzdF9uYW1lIjoiQWRtaW4ifX0sImlhdCI6MTczMjgwNzE3NSwiZXhwIjoxNzM1Mzk5MTc1LCJzdWIiOiI3MjY3OTIwMDY4MjU5MDM1ODI2IiwianRpIjoiNzI2NzkyMDA2ODYwOTQ4NDU4MyJ9.zjKluTrEYXECfuRiZbBfUQgYmT19YpUXM1LjS2QQ96ITTWYkAgUULuz4wF-3IpXYlR4J2vAdGBVHXaDuXUwtow; Max-Age=2592000; Domain=localhost; Path=/; Expires=Sat, 28 Dec 2024 15:19:35 GMT; HttpOnly; SameSite=Lax"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "308"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"134-vXxYAQgr8PwbrZulW3z410PbQs0\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 28 Nov 2024 15:19:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": \"7267920068259035826\",\n        \"first_name\": \"Super\",\n        \"last_name\": \"Admin\",\n        \"email\": \"test@mailinator.com\",\n        \"password\": \"$2b$10$risceSYuXDK7DOSvnt15cuo.evg8MT5TmWznskcCmpbCRSobZZdnm\",\n        \"created_at\": \"2024-11-28T15:19:35.772Z\",\n        \"updated_at\": \"2024-11-28T15:19:35.772Z\",\n        \"deleted\": false,\n        \"active_organization_id\": null\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Sign In",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"superadmin@mailinator.com\",\n    \"password\": \"Password@123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/v1/auth/signin",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Sign In",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"superadmin@mailinator.com\",\n    \"password\": \"Password@123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/v1/auth/signin",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"auth",
+										"signin"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, X-Org"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT,POST,GET,DELETE,OPTIONS"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains; preload"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "development_access_token=eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb250ZW50Ijp7ImRhdGEiOnsiaWQiOiI3MjY3NzY3MzM1OTU3ODMxNDM3IiwiZW1haWwiOiJzdXBlcmFkbWluQG1haWxpbmF0b3IuY29tIiwiYWN0aXZlX29yZ2FuaXphdGlvbl9pZCI6IjcyNjc3Njg2MDMxNDMzNTgyODUiLCJmaXJzdF9uYW1lIjoiU3VwZXIiLCJsYXN0X25hbWUiOiJBZG1pbiJ9fSwiaWF0IjoxNzMyODA3Mjk3LCJleHAiOjE3MzUzOTkyOTcsInN1YiI6IjcyNjc3NjczMzU5NTc4MzE0MzciLCJqdGkiOiI3MjY3OTIwNTc3MjQ3MzA0ODgyIn0.bBWX4UOpahGrRXwiRGaUhjSHq6CZWnjd3hd0IUi6GTdyCecMqaorGtvCHPM0FXy965yxHLotc7mbuqJdOQqc4Q; Max-Age=18000; Domain=localhost; Path=/; Expires=Thu, 28 Nov 2024 20:21:37 GMT; HttpOnly; SameSite=Lax"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "development_refresh_token=eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb250ZW50Ijp7ImRhdGEiOnsiaWQiOiI3MjY3NzY3MzM1OTU3ODMxNDM3IiwiZW1haWwiOiJzdXBlcmFkbWluQG1haWxpbmF0b3IuY29tIiwiYWN0aXZlX29yZ2FuaXphdGlvbl9pZCI6IjcyNjc3Njg2MDMxNDMzNTgyODUiLCJmaXJzdF9uYW1lIjoiU3VwZXIiLCJsYXN0X25hbWUiOiJBZG1pbiJ9fSwiaWF0IjoxNzMyODA3Mjk3LCJleHAiOjE3MzUzOTkyOTcsInN1YiI6IjcyNjc3NjczMzU5NTc4MzE0MzciLCJqdGkiOiI3MjY3OTIwNTc3MjUxNjY5MjA2In0.HzJYg4592KTRm7kLnvoX-cvxQ95UPi3O83L02a5QMcROdBKlJlmq0zelmHn-3-5Vc4iKjIvVri1Jn1mx6eko3g; Max-Age=2592000; Domain=localhost; Path=/; Expires=Sat, 28 Dec 2024 15:21:37 GMT; HttpOnly; SameSite=Lax"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "331"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"14b-FRRrcbuJEB8GFJUDxD5tvHMuRAo\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 28 Nov 2024 15:21:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": \"7267767335957831437\",\n        \"first_name\": \"Super\",\n        \"last_name\": \"Admin\",\n        \"email\": \"superadmin@mailinator.com\",\n        \"password\": \"$2b$10$eN2q9NldilYNEyqGdHd3secDPr.YTQSORq96x01kwkbCjQbd9Unz6\",\n        \"created_at\": \"2024-11-28T05:12:41.540Z\",\n        \"updated_at\": \"2024-11-28T05:17:43.625Z\",\n        \"deleted\": false,\n        \"active_organization_id\": \"7267768603143358285\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Sign Out",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/v1/auth/signout",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"auth",
+								"signout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Organization",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"The Matrix\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/v1/organization",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"organization"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"The Matrix\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/v1/organization",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"organization"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, X-Org"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT,POST,GET,DELETE,OPTIONS"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains; preload"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "development_access_token=eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb250ZW50Ijp7ImRhdGEiOnsiaWQiOiI3MjY3NzY3MzM1OTU3ODMxNDM3IiwiZW1haWwiOiJzdXBlcmFkbWluQG1haWxpbmF0b3IuY29tIiwiYWN0aXZlX29yZ2FuaXphdGlvbl9pZCI6IjcyNjc3Njg2MDMxNDMzNTgyODUiLCJmaXJzdF9uYW1lIjoiU3VwZXIiLCJsYXN0X25hbWUiOiJBZG1pbiJ9fSwiaWF0IjoxNzMyNzcxMDYzLCJleHAiOjE3MzUzNjMwNjMsInN1YiI6IjcyNjc3NjczMzU5NTc4MzE0MzciLCJqdGkiOiI3MjY3NzY4NjAzMjU3MTE1NzE4In0.Fn08b_px54p8Lg4p1YNqeJ-Nj9hqX8B-1BGazT8THAVWn9l-lNRehgO0mhfu89wWbg1PT-Z2Kz592-eTJDQVww; Max-Age=18000; Domain=localhost; Path=/; Expires=Thu, 28 Nov 2024 10:17:43 GMT; HttpOnly; SameSite=Lax"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "development_refresh_token=eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb250ZW50Ijp7ImRhdGEiOnsiaWQiOiI3MjY3NzY3MzM1OTU3ODMxNDM3IiwiZW1haWwiOiJzdXBlcmFkbWluQG1haWxpbmF0b3IuY29tIiwiYWN0aXZlX29yZ2FuaXphdGlvbl9pZCI6IjcyNjc3Njg2MDMxNDMzNTgyODUiLCJmaXJzdF9uYW1lIjoiU3VwZXIiLCJsYXN0X25hbWUiOiJBZG1pbiJ9fSwiaWF0IjoxNzMyNzcxMDYzLCJleHAiOjE3MzUzNjMwNjMsInN1YiI6IjcyNjc3NjczMzU5NTc4MzE0MzciLCJqdGkiOiI3MjY3NzY4NjAzMjcyMTgzODAzIn0.aXSBNjADRTMwfuQfSFiblxJIpeyEpHTadM0g5aJwnWeBnaSJLdeh4j8C2WXnXSPd8MQ5FH7c_I0D56gcVoTSjQ; Max-Age=2592000; Domain=localhost; Path=/; Expires=Sat, 28 Dec 2024 05:17:43 GMT; HttpOnly; SameSite=Lax"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "217"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"d9-xMo3wbv/llfwmxODIYVxk9DBLKw\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 28 Nov 2024 05:17:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"content\": {\n        \"data\": {\n            \"id\": \"7267768603143358285\",\n            \"name\": \"The Matrix\",\n            \"created_at\": \"2024-11-28T05:17:43.600Z\",\n            \"updated_at\": \"2024-11-28T05:17:43.600Z\",\n            \"created_by_id\": \"7267767335957831437\",\n            \"deleted\": false\n        }\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Staff",
+			"item": [
+				{
+					"name": "Add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Org",
+								"value": "7267768603143358285",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"role_id\": \"editor\",\n    \"user_id\": \"7267920068259035826\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/v1/staff",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"staff"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add Admin",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Org",
+										"value": "7267768603143358285",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"role_id\": \"admin\",\n    \"user_id\": \"7267769280155744951\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/v1/staff",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"staff"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Add Reviewer",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Org",
+										"value": "7267768603143358285",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"role_id\": \"reviewer\",\n    \"user_id\": \"7267770680238258439\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/v1/staff",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"staff"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Add Editor",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Org",
+										"value": "7267768603143358285",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"role_id\": \"editor\",\n    \"user_id\": \"7267770855566796962\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/v1/staff",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"staff"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Add Super Admin",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Org",
+										"value": "7267768603143358285",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"role_id\": \"super_admin\",\n    \"user_id\": \"7267769280155744951\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/v1/staff",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"staff"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Add",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Org",
+										"value": "7267768603143358285",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"role_id\": \"editor\",\n    \"user_id\": \"7267920068259035826\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/v1/staff",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"staff"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, X-Org"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT,POST,GET,DELETE,OPTIONS"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains; preload"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "250"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"fa-0lgnfeuDdRIUEVkm3UZFFHYZkJ8\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 28 Nov 2024 15:27:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"content\": {\n        \"data\": {\n            \"id\": \"7267922049526439387\",\n            \"user_id\": \"7267920068259035826\",\n            \"organization_id\": \"7267768603143358285\",\n            \"created_at\": \"2024-11-28T15:27:28.069Z\",\n            \"updated_at\": \"2024-11-28T15:27:28.069Z\",\n            \"role_id\": \"editor\",\n            \"deleted\": false\n        }\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Blog",
+			"item": [
+				{
+					"name": "Create New Blog",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Org",
+								"value": "7267768603143358285",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"title\",\n  \"content\": \"content\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/v1/blog",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"blog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Comment On Blog",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Org",
+								"value": "7267768603143358285",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"comment\": \"Hey\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/v1/blog/:blog_id/comment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"blog",
+								":blog_id",
+								"comment"
+							],
+							"variable": [
+								{
+									"key": "blog_id",
+									"value": "7267806725693883783"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Review On Blog",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Org",
+								"value": "7267768603143358285",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"review\": \"Nice one\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/v1/blog/:blog_id/review",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"blog",
+								":blog_id",
+								"review"
+							],
+							"variable": [
+								{
+									"key": "blog_id",
+									"value": "7267806725693883783"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Blogs",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"include\": {\n        \"created_by_staff\": true,\n        \"organization\": true\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/v1/blog/query",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"blog",
+								"query"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Published Blogs",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"include\": {\n        \"created_by_staff\": true\n    },\n    \"where\": {\n        \"published\": true\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/v1/blog/query",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"blog",
+										"query"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "List Unpublished Blogs",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"include\": {\n        \"created_by_staff\": true\n    },\n    \"where\": {\n        \"published\": false\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/v1/blog/query",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"blog",
+										"query"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "List Deleted Blogs",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"include\": {\n        \"created_by_staff\": true\n    },\n    \"where\": {\n        \"deleted\": true\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/v1/blog/query",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"blog",
+										"query"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "List Blogs",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"include\": {\n        \"created_by_staff\": true,\n        \"organization\": true\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/v1/blog/query",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"blog",
+										"query"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, X-Org"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT,POST,GET,DELETE,OPTIONS"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains; preload"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2164"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"874-czZ01e3X62KOekGdwjhwJbnDnzY\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 28 Nov 2024 15:16:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"staus\": true,\n    \"content\": {\n        \"data\": [\n            {\n                \"id\": \"7267806321407703501\",\n                \"title\": \"This is the new title\",\n                \"content\": \"This is the new content\",\n                \"created_at\": \"2024-11-28T07:47:36.335Z\",\n                \"updated_at\": \"2024-11-28T15:11:19.246Z\",\n                \"deleted\": false,\n                \"published\": false,\n                \"organization_id\": \"7267768603143358285\",\n                \"created_by_staff_id\": \"7267768603226380358\",\n                \"created_by_staff\": {\n                    \"id\": \"7267768603226380358\",\n                    \"user_id\": \"7267767335957831437\",\n                    \"organization_id\": \"7267768603143358285\",\n                    \"created_at\": \"2024-11-28T05:17:43.620Z\",\n                    \"updated_at\": \"2024-11-28T05:17:43.620Z\",\n                    \"role_id\": \"super_admin\",\n                    \"deleted\": false\n                },\n                \"organization\": {\n                    \"id\": \"7267768603143358285\",\n                    \"name\": \"The Matrix\",\n                    \"created_at\": \"2024-11-28T05:17:43.600Z\",\n                    \"updated_at\": \"2024-11-28T05:17:43.600Z\",\n                    \"created_by_id\": \"7267767335957831437\",\n                    \"deleted\": false\n                }\n            },\n            {\n                \"id\": \"7267806676391571868\",\n                \"title\": \"title\",\n                \"content\": \"content\",\n                \"created_at\": \"2024-11-28T07:49:00.970Z\",\n                \"updated_at\": \"2024-11-28T07:49:00.970Z\",\n                \"deleted\": false,\n                \"published\": false,\n                \"organization_id\": \"7267768603143358285\",\n                \"created_by_staff_id\": \"7267768603226380358\",\n                \"created_by_staff\": {\n                    \"id\": \"7267768603226380358\",\n                    \"user_id\": \"7267767335957831437\",\n                    \"organization_id\": \"7267768603143358285\",\n                    \"created_at\": \"2024-11-28T05:17:43.620Z\",\n                    \"updated_at\": \"2024-11-28T05:17:43.620Z\",\n                    \"role_id\": \"super_admin\",\n                    \"deleted\": false\n                },\n                \"organization\": {\n                    \"id\": \"7267768603143358285\",\n                    \"name\": \"The Matrix\",\n                    \"created_at\": \"2024-11-28T05:17:43.600Z\",\n                    \"updated_at\": \"2024-11-28T05:17:43.600Z\",\n                    \"created_by_id\": \"7267767335957831437\",\n                    \"deleted\": false\n                }\n            },\n            {\n                \"id\": \"7267806725693883783\",\n                \"title\": \"title\",\n                \"content\": \"content\",\n                \"created_at\": \"2024-11-28T07:49:12.724Z\",\n                \"updated_at\": \"2024-11-28T07:49:12.724Z\",\n                \"deleted\": false,\n                \"published\": false,\n                \"organization_id\": \"7267768603143358285\",\n                \"created_by_staff_id\": \"7267769466583371124\",\n                \"created_by_staff\": {\n                    \"id\": \"7267769466583371124\",\n                    \"user_id\": \"7267769280155744951\",\n                    \"organization_id\": \"7267768603143358285\",\n                    \"created_at\": \"2024-11-28T05:21:09.460Z\",\n                    \"updated_at\": \"2024-11-28T05:21:09.460Z\",\n                    \"role_id\": \"admin\",\n                    \"deleted\": false\n                },\n                \"organization\": {\n                    \"id\": \"7267768603143358285\",\n                    \"name\": \"The Matrix\",\n                    \"created_at\": \"2024-11-28T05:17:43.600Z\",\n                    \"updated_at\": \"2024-11-28T05:17:43.600Z\",\n                    \"created_by_id\": \"7267767335957831437\",\n                    \"deleted\": false\n                }\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get A Blog",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/v1/blog/:blog_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"blog",
+								":blog_id"
+							],
+							"variable": [
+								{
+									"key": "blog_id",
+									"value": "7267806321407703501"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get A Blog",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/v1/blog/7267806321407703501",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"blog",
+										"7267806321407703501"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, X-Org"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT,POST,GET,DELETE,OPTIONS"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains; preload"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "766"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2fe-nPZ5E5ndnIb9BX+Mt9U/rYveQCU\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 28 Nov 2024 15:16:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"staus\": true,\n    \"content\": {\n        \"data\": {\n            \"id\": \"7267806321407703501\",\n            \"title\": \"This is the new title\",\n            \"content\": \"This is the new content\",\n            \"created_at\": \"2024-11-28T07:47:36.335Z\",\n            \"updated_at\": \"2024-11-28T15:11:19.246Z\",\n            \"deleted\": false,\n            \"published\": false,\n            \"organization_id\": \"7267768603143358285\",\n            \"created_by_staff_id\": \"7267768603226380358\",\n            \"organization\": {\n                \"id\": \"7267768603143358285\",\n                \"name\": \"The Matrix\",\n                \"created_at\": \"2024-11-28T05:17:43.600Z\",\n                \"updated_at\": \"2024-11-28T05:17:43.600Z\",\n                \"created_by_id\": \"7267767335957831437\",\n                \"deleted\": false\n            },\n            \"created_by_staff\": {\n                \"id\": \"7267768603226380358\",\n                \"user_id\": \"7267767335957831437\",\n                \"organization_id\": \"7267768603143358285\",\n                \"created_at\": \"2024-11-28T05:17:43.620Z\",\n                \"updated_at\": \"2024-11-28T05:17:43.620Z\",\n                \"role_id\": \"super_admin\",\n                \"deleted\": false\n            }\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Publish",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Org",
+								"value": "7267768603143358285",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/v1/blog/:blog_id/publish",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"blog",
+								":blog_id",
+								"publish"
+							],
+							"variable": [
+								{
+									"key": "blog_id",
+									"value": "7267806321407703501"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Publish",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-Org",
+										"value": "7267768603143358285",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/v1/blog/:blog_id/publish",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"blog",
+										":blog_id",
+										"publish"
+									],
+									"variable": [
+										{
+											"key": "blog_id",
+											"value": "7267806321407703501"
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, X-Org"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT,POST,GET,DELETE,OPTIONS"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains; preload"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "328"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"148-RkDXv214dR6EbWUVktgIri6i+Eg\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 28 Nov 2024 15:32:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"content\": {\n        \"data\": {\n            \"id\": \"7267806321407703501\",\n            \"title\": \"This is the new title\",\n            \"content\": \"This is the new content\",\n            \"created_at\": \"2024-11-28T07:47:36.335Z\",\n            \"updated_at\": \"2024-11-28T15:32:45.172Z\",\n            \"deleted\": false,\n            \"published\": true,\n            \"organization_id\": \"7267768603143358285\",\n            \"created_by_staff_id\": \"7267768603226380358\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Unpublish",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Org",
+								"value": "7267768603143358285",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/v1/blog/:blog_id/un-publish",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"blog",
+								":blog_id",
+								"un-publish"
+							],
+							"variable": [
+								{
+									"key": "blog_id",
+									"value": "7267806321407703501"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Unpublish",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-Org",
+										"value": "7267768603143358285",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/v1/blog/:blog_id/un-publish",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"blog",
+										":blog_id",
+										"un-publish"
+									],
+									"variable": [
+										{
+											"key": "blog_id",
+											"value": "7267806321407703501"
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, X-Org"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT,POST,GET,DELETE,OPTIONS"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains; preload"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "329"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"149-tgsLdMToO7zQ6Zd3sj9D5GKtc2s\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 28 Nov 2024 15:32:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"content\": {\n        \"data\": {\n            \"id\": \"7267806321407703501\",\n            \"title\": \"This is the new title\",\n            \"content\": \"This is the new content\",\n            \"created_at\": \"2024-11-28T07:47:36.335Z\",\n            \"updated_at\": \"2024-11-28T15:32:24.984Z\",\n            \"deleted\": false,\n            \"published\": false,\n            \"organization_id\": \"7267768603143358285\",\n            \"created_by_staff_id\": \"7267768603226380358\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Blog",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Org",
+								"value": "7267768603143358285",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"This is the new content\",\n    \"title\": \"This is the new title\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/v1/blog/:blog_id/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"blog",
+								":blog_id",
+								"update"
+							],
+							"variable": [
+								{
+									"key": "blog_id",
+									"value": "7267806321407703501"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Blog",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-Org",
+										"value": "7267768603143358285",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"content\": \"This is the new content\",\n    \"title\": \"This is the new title\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/v1/blog/:blog_id/update",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"blog",
+										":blog_id",
+										"update"
+									],
+									"variable": [
+										{
+											"key": "blog_id",
+											"value": "7267806321407703501"
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, X-Org"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT,POST,GET,DELETE,OPTIONS"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains; preload"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "329"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"149-2nlxnzDvA7lToiTqvuKuDfeovrE\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 28 Nov 2024 15:32:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"content\": {\n        \"data\": {\n            \"id\": \"7267806321407703501\",\n            \"title\": \"This is the new title\",\n            \"content\": \"This is the new content\",\n            \"created_at\": \"2024-11-28T07:47:36.335Z\",\n            \"updated_at\": \"2024-11-28T15:32:34.564Z\",\n            \"deleted\": false,\n            \"published\": false,\n            \"organization_id\": \"7267768603143358285\",\n            \"created_by_staff_id\": \"7267768603226380358\"\n        }\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}

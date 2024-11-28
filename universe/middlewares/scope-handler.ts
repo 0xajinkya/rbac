@@ -6,8 +6,17 @@ import { Context as CoreContext } from "@theinternetfolks/context";
 import { PlatformError } from "@universe/errors";
 import { NextFunction, Request, Response } from "express"
 
+/**
+ * Middleware for handling role-based scope access validation.
+ * 
+ * @param {string} scope - The scope that the role is required to have for access.
+ * @param {object} [options] - Options for customizing the organization retrieval process.
+ * @param {Function} [options.get_organization_id] - A custom function to extract the organization ID from the request.
+ * 
+ * @returns {Function} - The middleware function that will be used in the Express app.
+ */
 export const ScopeHandlerMiddleware = (scope: string, options?: {
-    get_organization_id?: (request: Request) => string | null
+    get_organization_id?: (request: Request) => string | null,
 }) => async (
     request: Request,
     _response: Response,

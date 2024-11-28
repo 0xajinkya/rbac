@@ -2,7 +2,7 @@ import type { IRoleCreate } from "@interfaces/identity";
 
 export type Roles = "super_admin" | "admin" | "editor" | "reviewer" | "user";
 
-export const RoleNameFromKey: Record<string, typeof AllRoleList[number]> = {
+export const RoleNameFromKey: Record<typeof AllRoleList[number], typeof AllRoleList[number]> = {
   super_admin: "super_admin",
   admin: "admin",
   editor: "editor",
