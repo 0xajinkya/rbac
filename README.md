@@ -65,7 +65,7 @@ Follow these steps to set up the project and run it locally:
 		    -   `bun db:migrate dev`
 4. **Generate Prisma Client**
 	-   Generate the Prisma Client to interact with the database:
-		    -   `bun db:migrate dev`
+		    -   `bun db:generate`
 5. **Start the Development Server**
 	-   Run the development server:
 		    -   `bun dev`
