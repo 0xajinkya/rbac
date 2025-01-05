@@ -152,6 +152,7 @@ const createCookie = (response: Response, data: {
             data.access_token,
             {
                 ...COOKIE_OPTIONS,
+                domain: envconfig.authentication.domain,
                 maxAge: expiresIn.access_token
             }
         );
@@ -163,6 +164,7 @@ const createCookie = (response: Response, data: {
             data.refresh_token,
             {
                 ...COOKIE_OPTIONS,
+                domain: envconfig.authentication.domain,
                 maxAge: expiresIn.refresh_token
             }
         );
