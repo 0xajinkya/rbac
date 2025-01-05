@@ -19,6 +19,7 @@ export interface EnvConfig {
     authentication: {
         domain: string;
         cookie: {
+            domain: string;
             sameSite: "strict" | "lax" | "none";
             secret: string;
             ssl: string;

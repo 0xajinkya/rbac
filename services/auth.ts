@@ -14,7 +14,7 @@ import Hash from "@libraries/hash";
 const COOKIE_OPTIONS: CookieOptions = {
     httpOnly: true,
     secure: typeof envconfig.authentication.cookie.ssl !== 'undefined',
-    domain: envconfig.authentication.domain,
+    domain: envconfig.authentication.cookie.domain,
     sameSite:
         envconfig.authentication.cookie.sameSite &&
             ['none', 'lax', 'strict'].includes(
@@ -152,7 +152,6 @@ const createCookie = (response: Response, data: {
             data.access_token,
             {
                 ...COOKIE_OPTIONS,
-                domain: envconfig.authentication.domain,
                 maxAge: expiresIn.access_token
             }
         );
@@ -164,7 +163,6 @@ const createCookie = (response: Response, data: {
             data.refresh_token,
             {
                 ...COOKIE_OPTIONS,
-                domain: envconfig.authentication.domain,
                 maxAge: expiresIn.refresh_token
             }
         );

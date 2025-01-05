@@ -19,6 +19,7 @@
     "authentication": {
         "domain": "DOMAIN",
         "cookie": {
+            "domain": "COOKIE_DOMAIN",
             "samesite": "COOKIE_SAMESITE",
             "secret": "COOKIE_SECRET",
             "ssl": "COOKIE_SSL"
