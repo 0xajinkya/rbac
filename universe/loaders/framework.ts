@@ -11,12 +11,12 @@ export const FrameworkLoader = ({ app }: {
     app.enable("trust proxy");
 
     app.use(cors({
-        origin: 'http://localhost:3001', // Allow requests from the frontend
+        origin: envconfig.authentication.domain, // Allow requests from the frontend
         credentials: true         // Allow cookies
     }));
 
     app.use((req, res, next) => {
-        res.header("Access-Control-Allow-Origin", "http://localhost:3001");
+        res.header("Access-Control-Allow-Origin", envconfig.authentication.domain);
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, X-Org");
         res.header('Access-Control-Allow-Credentials', 'true');
         res.header('Access-Control-Allow-Methods', 'PUT,POST,GET,DELETE,OPTIONS');
