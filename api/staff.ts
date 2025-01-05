@@ -13,3 +13,27 @@ StaffRouter.post(
     //@ts-ignore
     StaffController.Add
 );
+
+StaffRouter.post(
+    "/query",
+    AuthHandlerMiddleware(),
+    ScopeHandlerMiddleware(scopes.staff.read),
+    //@ts-ignore
+    StaffController.List
+);
+
+StaffRouter.delete(
+    "/:id",
+    AuthHandlerMiddleware(),
+    ScopeHandlerMiddleware(scopes.staff.update),
+    //@ts-ignore
+    StaffController.Delete
+)
+
+StaffRouter.get(
+    "/me",
+    AuthHandlerMiddleware(),
+    ScopeHandlerMiddleware(scopes.staff.read),
+    //@ts-ignore
+    StaffController.GetMe
+)

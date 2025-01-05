@@ -11,7 +11,8 @@
     "db:resolve": "env-cmd -f .env.development prisma migrate resolve --applied",
     "dev": "export NODE_CONFIG_DIR=$PWD && env-cmd -f .env.development ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --no-deprecation index.ts",
     "startall": "docker compose -f config/other/postgres/docker-compose.yml up -d && docker exec -i postgres sh < scripts/make_postgres_db.sh",
-    "flushall": "docker exec -i postgres sh < ./scripts/flush-postgres.sh && docker exec -i postgres sh < scripts/make_postgres_db.sh"
+    "flushall": "docker exec -i postgres sh < ./scripts/flush-postgres.sh && docker exec -i postgres sh < scripts/make_postgres_db.sh",
+    "start": "export NODE_CONFIG_DIR=$PWD && bun run ${APP=index}.ts"
   },
   "peerDependencies": {
     "typescript": "^5.7.2"
@@ -33,6 +34,7 @@
     "bcrypt": "^5.1.1",
     "config": "^3.3.12",
     "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
     "env-cmd": "^10.1.0",
     "express": "^4.21.1",
     "express-async-errors": "^3.1.1",

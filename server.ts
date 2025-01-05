@@ -7,6 +7,7 @@ import { AuthRouter } from "@api/auth";
 import { OrganizationRouter } from "@api/organization";
 import { StaffRouter } from "@api/staff";
 import { BlogRouter } from "@api/blog";
+import { UserRouter } from "@api/user";
 
 /**
  * Initializes and configures the Express server.
@@ -34,6 +35,8 @@ export const Server = async () => {
      * @description Routes for authentication-related operations.
      */
     app.use("/v1/auth", AuthRouter);
+
+    app.use("/v1/user", UserRouter)
 
     /**
      * @route /v1/organization

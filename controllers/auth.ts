@@ -1,4 +1,5 @@
 import { AuthService } from "@services/auth";
+import { ContextService } from "@services/context";
 import { PlatformError } from "@universe/errors";
 import type { Request, Response } from "express";
 
@@ -29,6 +30,18 @@ const SignOut = async (req: Request, res: Response) => {
         status: true,
     });
 };
+
+const GetMe = async (req: Request, res: Response) => {
+    const session = ContextService.GetSession();
+
+    const data = await AuthService.GetMe(session);
+    return res.json({
+        status: true,
+        content: {
+            data
+        }
+    });
+}
 
 
 export const AuthController = {
@@ -70,5 +83,7 @@ export const AuthController = {
      * @returns {Promise<Response>} - JSON response indicating sign-out success and clearing cookies.
      * - The response contains `{ status: true }` and clears any authentication-related cookies.
     */
-    SignOut
+    SignOut,
+
+    GetMe
 };

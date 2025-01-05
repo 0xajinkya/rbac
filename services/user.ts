@@ -126,6 +126,28 @@ const Update = async (id: string, data: IUserUpdate, options?: IPrismaOptions) =
     return updatedUser;
 }
 
+const ListUserToAddInOrganization = async (organization_id: string, options?: IPrismaOptions) => {
+    const transaction = await Database.getTransaction(options);
+    const response = await transaction.user.findMany({
+        where: {
+            staff: {
+                none: {
+                    organization_id: organization_id
+                }
+            },
+            deleted: false
+        },
+        select: {
+            id: true,
+            email: true,
+            first_name: true,
+            last_name: true
+        }
+    });
+    return response;
+
+}
+
 export const UserService = {
     /**
      * Creates a new user in the database.
@@ -165,5 +187,6 @@ export const UserService = {
      * 
      * @returns {Promise<IUser>} - The updated user object.
      */
-    Update
+    Update,
+    ListUserToAddInOrganization
 }

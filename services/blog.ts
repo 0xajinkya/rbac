@@ -30,7 +30,14 @@ const Create = async (data: IBlogInput, options?: IPrismaOptions & { published?:
     }
 
     const result = await (await Database.getTransaction(options)).blog.create({
-        data: document
+        data: document,
+        include: {
+            created_by_staff: {
+                include: {
+                    user: true
+                }
+            }
+        }
     });
     return result;
 }
@@ -84,7 +91,7 @@ const Delete = async (identifier: string, options?: IPrismaOptions) => {
         })
     }
 
-    const response = await Update(identifier, { deleted: false }, options);
+    const response = await Update(identifier, { deleted: true }, options);
     return response;
 }
 
@@ -187,7 +194,6 @@ const List = async ({
     const response = await transaction.blog.findMany({
         where: {
             ...where,
-            deleted: false
         },
         skip: skip < 0 ? 0 : skip,
         take: limit < 0 ? 10 : limit,

@@ -17,7 +17,11 @@ const Create = async (data: IBlogCommentInput, options?: IPrismaOptions) => {
         created_by_user_id: user.id
     }
     const result = await (await Database.getTransaction(options)).blog_comment.create({
-        data: document
+        data: document,
+        include: {
+            created_by_user: true,
+            blog: true
+        }
     });
     return result;
 }
@@ -33,7 +37,11 @@ const Review = async (data: IBlogReviewInput, options?: IPrismaOptions) => {
         created_by_staff_id: staff.id
     }
     const result = await (await Database.getTransaction(options)).blog_review.create({
-        data: document
+        data: document,
+        include: {
+            // blog: true,
+            // created_by_staff: true
+        }
     });
     return result;
 }

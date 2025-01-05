@@ -12,3 +12,25 @@ OrganizationRouter.post(
     //@ts-ignore
     OrganizationController.Create
 );
+
+OrganizationRouter.get(
+    "/get-member-organizations",
+    AuthHandlerMiddleware(),
+    //@ts-ignore
+    OrganizationController.GetMemberOrganizations
+);
+
+OrganizationRouter.get(
+    "/:id",
+    AuthHandlerMiddleware(),
+    //@ts-ignore
+    OrganizationController.Get
+);
+
+
+OrganizationRouter.post(
+    "/:id/login",
+    AuthHandlerMiddleware(),
+    //@ts-ignore
+    OrganizationController.Login
+)

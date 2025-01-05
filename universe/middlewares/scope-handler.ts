@@ -29,7 +29,7 @@ export const ScopeHandlerMiddleware = (scope: string, options?: {
         const organization_id = options?.get_organization_id
             ? options.get_organization_id(request)
             : request.get('X-Org');
-
+        console.log(organization_id)
         if (!organization_id) {
             throw new PlatformError('ResourceNotFound', {
                 resource: 'Organization'

@@ -8,7 +8,7 @@ import ms from 'ms';
 import { UserService } from "./user";
 import type { CookieOptions, Response } from "express";
 import { AuthHelperService } from "./auth-helper";
-import { IResponse } from "@interfaces/common";
+import { ICommonUser, IResponse } from "@interfaces/common";
 import Hash from "@libraries/hash";
 
 const COOKIE_OPTIONS: CookieOptions = {
@@ -26,7 +26,7 @@ const COOKIE_OPTIONS: CookieOptions = {
 };
 
 const expiresIn = {
-    access_token: ms(envconfig.authentication.jwt.expires_in || '15m'),
+    access_token: ms(envconfig.authentication.jwt.expires_in || '30d'),
     csrf_token: ms('24h'),
     refresh_token: ms(envconfig.authentication.jwt.refresh_expires_in || '30d')
 };
@@ -190,6 +190,16 @@ const clearCookie = (response: Response) => {
     return response;
 }
 
+const GetMe = async (session: ICommonUser) => {
+    const user = await UserService.Get(session.id);
+    if (!user) {
+        throw new PlatformError("ResourceNotFound", {
+            resource: "User",
+        })
+    }
+    return user;
+}
+
 export const AuthService = {
     /**
      * Registers a new user and generates authentication tokens.
@@ -266,5 +276,7 @@ export const AuthService = {
      * 
      * @returns {Response} - The response object with cookies cleared.
     */
-    clearCookie
+    clearCookie,
+
+    GetMe
 }

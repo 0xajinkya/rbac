@@ -58,6 +58,16 @@ BlogRouter.put(
     BlogController.Update
 );
 
+BlogRouter.delete(
+    "/:id/delete",
+    [
+        AuthHandlerMiddleware(),
+        ScopeHandlerMiddleware(scopes.blog.publish)
+    ],
+    //@ts-ignore
+    BlogController.Delete
+);
+
 BlogRouter.post(
     "/:id/comment",
     [

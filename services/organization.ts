@@ -5,6 +5,8 @@ import { AuthHelperService } from "./auth-helper";
 import { helper } from "@libraries/helper";
 import { StaffService } from "./staff";
 import { Roles } from "@config/constants/roles";
+import { PlatformError } from "@universe/errors";
+import { UserService } from "./user";
 
 
 const Create = async (data: IOrganizationInput, options?: IPrismaOptions) => {
@@ -49,6 +51,58 @@ const Add = async ({ organizationId, userId, roleId }: {
     return staffUser;
 }
 
+const GetMemberOrganizations = async (userId: string, options?: IPrismaOptions) => {
+    const transaction = await Database.getTransaction(options);
+    const response = await transaction.organization.findMany({
+        where: {
+            staff: {
+                some: {
+                    user_id: userId
+                }
+            }
+        },
+        include: {
+            staff: {
+                where: {
+                    user_id: userId,
+                }
+            }
+        }
+    });
+    console.log(response);
+    return response;
+}
+
+const Login = async (organization_id: string, user_id: string, options?: IPrismaOptions) => {
+    const transaction = await Database.getTransaction(options);
+    const neededOrganization = await transaction.organization.findFirst({
+        where: {
+            id: organization_id,
+            staff: {
+                some: {
+                    user_id: user_id
+                }
+            }
+        },
+        include: {
+            staff: {
+                include: {
+                    role: true,
+                    user: true
+                }
+            },
+        }
+    });
+    if (!neededOrganization) {
+        throw new PlatformError("NotAllowedAccess");
+    }
+    await UserService.Update(user_id, {
+        active_organization_id: organization_id
+    })
+
+    return neededOrganization;
+}
+
 export const OrganizationService = {
     /**
      * Creates a new organization.
@@ -88,5 +142,7 @@ export const OrganizationService = {
     * 
     * @throws {PlatformError} - Throws an error if addition fails.
     */
-    Add
+    Add,
+    GetMemberOrganizations,
+    Login
 }

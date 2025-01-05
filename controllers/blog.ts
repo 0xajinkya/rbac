@@ -5,14 +5,16 @@ import { Request, Response } from "express";
 const Create = async (request: Request, response: Response) => {
     const {
         title,
-        content
+        content,
+        published
     } = request.body;
     const transaction = await Database.getTransaction();
     const blog = await BlogService.Create({
         title,
-        content
+        content,
     }, {
-        transaction
+        transaction,
+        published: published ?? false
     })
     return response.status(201).json({
         status: true,
@@ -80,6 +82,22 @@ const Update = async (request: Request, response: Response) => {
     })
 };
 
+
+const Delete = async (request: Request, response: Response) => {
+    const {
+        id
+    } = request.params;
+    const transaction = await Database.getTransaction();
+    const blog = await BlogService.Delete(id, {
+        transaction
+    })
+    return response.status(201).json({
+        status: true,
+        content: {
+            data: blog
+        }
+    })
+};
 const Comment = async (request: Request, response: Response) => {
     const {
         id
@@ -255,5 +273,6 @@ export const BlogController = {
      * 
      * @throws {PlatformError} - Throws an error if the blog is not found.
     */
-    Get
+    Get,
+    Delete
 }

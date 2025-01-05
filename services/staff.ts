@@ -8,6 +8,8 @@ import { helper } from "@libraries/helper";
 import { IStaff, IStaffCreate } from "@interfaces/identity/staff";
 import { Database } from "@universe/loaders/database";
 import { AuthHelperService } from "./auth-helper";
+import { Prisma } from "@prisma/client";
+import { ContextService } from "./context";
 
 const Get = async (id: string, options?: IPrismaOptions) => {
     const transaction = await Database.getTransaction(options);
@@ -73,7 +75,10 @@ const Add = async ({ userId, roleId, organizationId }: { userId: string, roleId:
         updated_at: new Date()
     };
     const staff = await transaction.staff.create({
-        data: document
+        data: document,
+        include: {
+            user: true
+        }
     });
     return staff;
 };
@@ -99,6 +104,77 @@ const hasAccess = async ({
         throw new PlatformError("NotAllowedAccess");
     }
     return result;
+}
+
+const List = async ({
+    where = {},
+    include = {},
+    order = {},
+    limit = 10,
+    skip = 0
+}: {
+    where?: Prisma.staffWhereInput,
+    include?: Prisma.staffInclude,
+    order?: Prisma.staffOrderByWithAggregationInput,
+    limit?: number,
+    skip?: number
+}, options?: IPrismaOptions) => {
+    const transaction = await Database.getTransaction(options);
+    const response = await transaction.staff.findMany({
+        where: {
+            ...where,
+        },
+        skip: skip < 0 ? 0 : skip,
+        take: limit < 0 ? 10 : limit,
+        orderBy: order,
+        include
+    });
+    return response;
+}
+
+const Delete = async (identifier: string, options?: IPrismaOptions) => {
+    const staff = await Get(identifier, options);
+    if (!staff) {
+        throw new PlatformError("ResourceNotFound", {
+            resource: "Staff",
+        })
+    }
+    const transaction = await Database.getTransaction(options);
+    const response = await transaction.staff.update({
+        where: {
+            id: identifier
+        },
+        data: {
+            deleted: true
+        }
+    });
+    return response;
+};
+
+const GetMe = async (options?: IPrismaOptions) => {
+    const transaction = await Database.getTransaction(options);
+    const organization_id = ContextService.GetSession().active_organization_id;
+
+    if (!organization_id) {
+        throw new PlatformError("NotAllowedAccess");
+    }
+    const staff = await transaction.staff.findFirst({
+        where: {
+            organization_id: organization_id
+        },
+        include: {
+            role: true,
+            organization: true,
+            user: true
+        }
+    });
+
+    if (!staff) {
+        throw new PlatformError("ResourceNotFound", {
+            resource: "Staff",
+        })
+    }
+    return staff;
 }
 
 export const StaffService = {
@@ -134,5 +210,8 @@ export const StaffService = {
      * @param {IPrismaOptions} options - Optional Prisma transaction options.
      * @returns {Promise<IStaff | null>} - The staff member details or null if not found.
     */
-    Get
+    Get,
+    List,
+    Delete,
+    GetMe
 }

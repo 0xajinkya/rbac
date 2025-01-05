@@ -1,4 +1,5 @@
 import { AuthController } from "@controllers/auth";
+import { AuthHandlerMiddleware } from "@middlewares/auth-handler";
 import { Router } from "express";
 
 export const AuthRouter = Router();
@@ -14,6 +15,13 @@ AuthRouter.post(
     //@ts-ignore
     AuthController.SignIn
 );
+
+AuthRouter.get(
+    "/me",
+    [AuthHandlerMiddleware()],
+    //@ts-ignore
+    AuthController.GetMe
+)
 
 AuthRouter.post(
     "/signout",

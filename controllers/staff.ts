@@ -48,6 +48,60 @@ const Add = async (request: Request, response: Response) => {
     })
 }
 
+export const List = async (request: Request, response: Response) => {
+    const {
+        where,
+        include,
+        order,
+        limit,
+        skip
+    } = request.body;
+
+    const staff = await StaffService.List({
+        where,
+        include,
+        order,
+        limit,
+        skip
+    });
+
+    return response.status(200).json({
+        status: true,
+        content: {
+            data: staff
+        }
+    })
+}
+
+export const Delete = async (request: Request, response: Response) => {
+    const {
+        id
+    } = request.params;
+    const transaction = await Database.getTransaction();
+    const staff = await StaffService.Delete(id, {
+        transaction
+    })
+    return response.status(201).json({
+        status: true,
+        content: {
+            data: staff
+        }
+    })
+}
+
+export const GetMe = async (request: Request, response: Response) => {
+    const transaction = await Database.getTransaction();
+    const staff = await StaffService.GetMe({
+        transaction
+    })
+    return response.status(201).json({
+        status: true,
+        content: {
+            data: staff
+        }
+    })
+}
+
 export const StaffController = {
     /**
      * Adds a staff member with a specified role to an organization.
@@ -56,5 +110,8 @@ export const StaffController = {
      * @param {Response} response - The HTTP response object where the result is sent.
      * @returns {Response} - The response with status and staff member data.
      */
-    Add
+    Add,
+    List,
+    Delete,
+    GetMe
 }

@@ -1,4 +1,4 @@
-import { ICommonUser, IContext, ITokenPayload, TCommonUser } from "@interfaces/common";
+import type { ICommonUser, IContext, ITokenPayload, TCommonUser } from "@interfaces/common";
 import { envconfig } from "@libraries/envconfig";
 import { Jwt } from "@libraries/jwt";
 import { Request, Response } from "express";
