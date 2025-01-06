@@ -18,6 +18,7 @@
     "services": {},
     "authentication": {
         "domain": "DOMAIN",
+        "host_name": "HOST_URL",
         "cookie": {
             "domain": "COOKIE_DOMAIN",
             "samesite": "COOKIE_SAMESITE",

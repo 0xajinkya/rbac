@@ -23,15 +23,10 @@ export const FrameworkLoader = ({ app }: {
         const host = getHost(request);
 
         if (envconfig.env !== 'development') {
-            const allowedOrigin = envconfig.authentication.domain; // Your FE domain: https://rbac-x.vercel.app
-
-            const parsedOrigin = new URL(
-                allowedOrigin.startsWith('http') ? allowedOrigin : `https://${allowedOrigin}`
-            ).hostname;
-
+            const allowedOrigin = envconfig.authentication.domain; 
             if (
                 request.hostname &&
-                request.hostname.includes(parsedOrigin) // Match only the hostname
+                request.hostname.includes(envconfig.authentication.host_name)
             ) {
                 // Handles CORS
                 response.setHeader('Access-Control-Allow-Origin', allowedOrigin);

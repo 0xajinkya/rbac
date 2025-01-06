@@ -18,6 +18,7 @@ export interface EnvConfig {
     // services: {}, //To store env variable for any third party services, if used any in this project
     authentication: {
         domain: string;
+        host_name: string;
         cookie: {
             domain: string;
             sameSite: "strict" | "lax" | "none";
