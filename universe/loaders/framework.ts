@@ -22,14 +22,27 @@ export const FrameworkLoader = ({ app }: {
 
         const host = getHost(request);
 
-        if (
-            request.hostname &&
-            (request.hostname.includes(envconfig.authentication.domain) ||
-                typeof process.env.COOKIE_SAMESITE === 'undefined')
-        ) {
-            // Handles CORS
-            response.setHeader('Access-Control-Allow-Origin', host);
-            response.setHeader('Access-Control-Allow-Credentials', 'true');
+        if (envconfig.env !== 'development') {
+            const allowedOrigin = envconfig.authentication.domain; // Your FE domain: https://rbac-x.vercel.app
+
+            if (
+                request.hostname &&
+                request.hostname.includes(new URL(allowedOrigin).hostname) // Match only the hostname
+            ) {
+                // Handles CORS
+                response.setHeader('Access-Control-Allow-Origin', allowedOrigin);
+                response.setHeader('Access-Control-Allow-Credentials', 'true');
+            }
+        } else {
+            if (
+                request.hostname &&
+                (request.hostname.includes(envconfig.authentication.domain) ||
+                    typeof process.env.COOKIE_SAMESITE === 'undefined')
+            ) {
+                // Handles CORS
+                response.setHeader('Access-Control-Allow-Origin', host);
+                response.setHeader('Access-Control-Allow-Credentials', 'true');
+            }
         }
 
         response.setHeader(
