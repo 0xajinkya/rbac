@@ -22,8 +22,12 @@ export const FrameworkLoader = ({ app }: {
 
         const host = getHost(request);
 
-        if (envconfig.env) {
+        if (envconfig.env !== "development") {
             const allowedOrigin = envconfig.authentication.domain;
+            console.log(allowedOrigin);
+            console.log(request.hostname);
+            console.log(envconfig.authentication.host_url);
+            console.log(request.hostname === envconfig.authentication.host_url)
             if (
                 request.hostname &&
                 request.hostname === envconfig.authentication.host_url
