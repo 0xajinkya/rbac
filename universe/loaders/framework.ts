@@ -24,13 +24,10 @@ export const FrameworkLoader = ({ app }: {
 
         if (envconfig.env) {
             const allowedOrigin = envconfig.authentication.domain;
-            console.log(request.hostname);
-            console.log(allowedOrigin);
             if (
                 request.hostname &&
-                    request.hostname.includes("https://") ? request.hostname.replace("https://", "").includes(allowedOrigin) : request.hostname.includes("http://") ? request.hostname.replace("http://", "").includes(allowedOrigin) : request.hostname.includes(allowedOrigin)
+                request.hostname === envconfig.authentication.host_url
             ) {
-                // Handles CORS
                 response.setHeader('Access-Control-Allow-Origin', allowedOrigin);
                 response.setHeader('Access-Control-Allow-Credentials', 'true');
             }
@@ -40,7 +37,6 @@ export const FrameworkLoader = ({ app }: {
                 (request.hostname.includes(envconfig.authentication.domain) ||
                     typeof process.env.COOKIE_SAMESITE === 'undefined')
             ) {
-                // Handles CORS
                 response.setHeader('Access-Control-Allow-Origin', host);
                 response.setHeader('Access-Control-Allow-Credentials', 'true');
             }
