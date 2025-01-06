@@ -3,7 +3,6 @@ import express, { Request } from 'express';
 import cookieparser from 'cookie-parser';
 import { envconfig } from '@libraries/envconfig';
 import { logger } from '@libraries/logger';
-import cors from "cors";
 
 export const getHost = (request: Request) => {
     const host =
@@ -18,19 +17,6 @@ export const FrameworkLoader = ({ app }: {
 }): void => {
     app.enable("trust proxy");
 
-    // app.use(cors({
-    //     origin: envconfig.authentication.domain, // Allow requests from the frontend
-    //     credentials: true         // Allow cookies
-    // }));
-
-    // app.use((req, res, next) => {
-    //     res.header("Access-Control-Allow-Origin", envconfig.authentication.domain);
-    //     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, X-Org");
-    //     res.header('Access-Control-Allow-Credentials', 'true');
-    //     res.header('Access-Control-Allow-Methods', 'PUT,POST,GET,DELETE,OPTIONS');
-    //     res.header('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
-    //     next();
-    // });
     //@ts-ignore
     app.all('*', (request, response, next) => {
 
