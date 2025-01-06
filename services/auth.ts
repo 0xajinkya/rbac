@@ -14,7 +14,7 @@ import Hash from "@libraries/hash";
 const COOKIE_OPTIONS: CookieOptions = {
     httpOnly: true,
     secure: typeof envconfig.authentication.cookie.ssl !== 'undefined',
-    domain: envconfig.authentication.domain,
+    // domain: envconfig.authentication.domain,
     sameSite:
         envconfig.authentication.cookie.sameSite &&
             ['none', 'lax', 'strict'].includes(
