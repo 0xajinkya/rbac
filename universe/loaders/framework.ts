@@ -24,15 +24,12 @@ export const FrameworkLoader = ({ app }: {
 
         if (envconfig.env !== "development") {
             const allowedOrigin = envconfig.authentication.domain;
-            console.log(allowedOrigin);
-            console.log(request.hostname);
-            console.log(envconfig.authentication.host_url);
             console.log(request.hostname === envconfig.authentication.host_url)
             if (
                 request.hostname &&
                 request.hostname === envconfig.authentication.host_url
             ) {
-                response.setHeader('Access-Control-Allow-Origin', allowedOrigin);
+                response.setHeader('Access-Control-Allow-Origin', host);
                 response.setHeader('Access-Control-Allow-Credentials', 'true');
             }
         } else {
