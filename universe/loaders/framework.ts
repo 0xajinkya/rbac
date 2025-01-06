@@ -49,7 +49,8 @@ export const FrameworkLoader = ({ app }: {
                 'Content-Length',
                 'Authorization',
                 'Accept',
-                'X-Requested-With'
+                'X-Requested-With',
+                "X-Org"
             ].join(',')
         );
         response.setHeader(
