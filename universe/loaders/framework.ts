@@ -22,11 +22,13 @@ export const FrameworkLoader = ({ app }: {
 
         const host = getHost(request);
 
-        if (envconfig.env !== 'development') {
-            const allowedOrigin = envconfig.authentication.domain; 
+        if (envconfig.env) {
+            const allowedOrigin = envconfig.authentication.domain;
+            console.log(request.hostname);
+            console.log(allowedOrigin);
             if (
                 request.hostname &&
-                request.hostname.includes(envconfig.authentication.host_name)
+                    request.hostname.includes("https://") ? request.hostname.replace("https://", "").includes(allowedOrigin) : request.hostname.includes("http://") ? request.hostname.replace("http://", "").includes(allowedOrigin) : request.hostname.includes(allowedOrigin)
             ) {
                 // Handles CORS
                 response.setHeader('Access-Control-Allow-Origin', allowedOrigin);
