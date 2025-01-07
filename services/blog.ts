@@ -65,7 +65,21 @@ const Publish = async (identifier: string, options?: IPrismaOptions) => {
             resource: "Blog",
         })
     }
-    const response = await Update(identifier, { published: true }, options);
+    const response = await Update(identifier, { published: true }, {
+        ...options,
+        include: {
+            organization: true,
+            blog_review: {
+                include: {
+                    created_by_staff: {
+                        include: {
+                            user: true
+                        }
+                    }
+                }
+            }
+        }
+    });
 
     return response;
 }
@@ -79,7 +93,21 @@ const UnPublish = async (identifier: string, options?: IPrismaOptions) => {
         })
     }
 
-    const response = await Update(identifier, { published: false }, options);
+    const response = await Update(identifier, { published: false }, {
+        ...options,
+        include: {
+            organization: true,
+            blog_review: {
+                include: {
+                    created_by_staff: {
+                        include: {
+                            user: true
+                        }
+                    }
+                }
+            }
+        }
+    });
     return response;
 }
 
@@ -96,7 +124,9 @@ const Delete = async (identifier: string, options?: IPrismaOptions) => {
     return response;
 }
 
-const Update = async (identifier: string, data: IBlogUpdate, options?: IPrismaOptions) => {
+const Update = async (identifier: string, data: IBlogUpdate, options?: IPrismaOptions & {
+    include?: Prisma.blogInclude
+}) => {
     const {
         content,
         title,
@@ -137,7 +167,8 @@ const Update = async (identifier: string, data: IBlogUpdate, options?: IPrismaOp
         },
         data: {
             ...document
-        }
+        },
+        include: options?.include
     });
     return response;
 }
