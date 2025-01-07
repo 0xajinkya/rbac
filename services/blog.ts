@@ -68,6 +68,11 @@ const Publish = async (identifier: string, options?: IPrismaOptions) => {
     const response = await Update(identifier, { published: true }, {
         ...options,
         include: {
+            created_by_staff: {
+                include: {
+                    user: true
+                }
+            },
             organization: true,
             blog_review: {
                 include: {
@@ -96,6 +101,11 @@ const UnPublish = async (identifier: string, options?: IPrismaOptions) => {
     const response = await Update(identifier, { published: false }, {
         ...options,
         include: {
+            created_by_staff: {
+                include: {
+                    user: true
+                }
+            },
             organization: true,
             blog_review: {
                 include: {
