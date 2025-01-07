@@ -36,7 +36,8 @@ const Create = async (data: IBlogInput, options?: IPrismaOptions & { published?:
                 include: {
                     user: true
                 }
-            }
+            },
+            organization: true
         }
     });
     return result;
