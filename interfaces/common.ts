@@ -53,3 +53,14 @@ export interface IContext {
   organization_user?: any;
   [key: string]: unknown;
 }
+
+export type RawDocument<T = unknown> = Record<string, T>;
+
+export type IError = {
+  status: false;
+  errors?: {
+    message?: string;
+    code?: string;
+    param?: string;
+  }[]
+}

@@ -3,6 +3,7 @@ import { ICommonUser } from "@interfaces/common";
 import { IStaff } from "@interfaces/identity/staff";
 import { IPrismaOptions } from "@interfaces/prisma"
 import { helper } from "@libraries/helper"
+import { CommentSchema, ReviewSchema } from "@schema/blog";
 import { Context as CoreContext } from "@theinternetfolks/context";
 import { Database } from "@universe/loaders/database";
 
@@ -16,6 +17,9 @@ const Create = async (data: IBlogCommentInput, options?: IPrismaOptions) => {
         blog_id: data.blog_id,
         created_by_user_id: user.id
     }
+
+    helper.isValidSchema(document, CommentSchema);
+
     const result = await (await Database.getTransaction(options)).blog_comment.create({
         data: document,
         include: {
@@ -36,11 +40,12 @@ const Review = async (data: IBlogReviewInput, options?: IPrismaOptions) => {
         blog_id: data.blog_id,
         created_by_staff_id: staff.id
     }
+    helper.isValidSchema(document, ReviewSchema);
     const result = await (await Database.getTransaction(options)).blog_review.create({
         data: document,
         include: {
-            // blog: true,
-            // created_by_staff: true
+            blog: true,
+            created_by_staff: true
         }
     });
     return result;

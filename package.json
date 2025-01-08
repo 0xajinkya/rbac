@@ -12,12 +12,14 @@
     "dev": "export NODE_CONFIG_DIR=$PWD && env-cmd -f .env.development ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --no-deprecation index.ts",
     "startall": "docker compose -f config/other/postgres/docker-compose.yml up -d && docker exec -i postgres sh < scripts/make_postgres_db.sh",
     "flushall": "docker exec -i postgres sh < ./scripts/flush-postgres.sh && docker exec -i postgres sh < scripts/make_postgres_db.sh",
-    "start": "export NODE_CONFIG_DIR=$PWD && bun run ${APP=index}.ts"
+    "start": "export NODE_CONFIG_DIR=$PWD && bun run ${APP=index}.ts",
+    "test": "scripty && export NODE_CONFIG_DIR=$PWD && env-cmd -f .env.test bun test --timeout 10000 --coverage --coverage-reporter lcov --coverage-reporter text --coverageDir=./"
   },
   "peerDependencies": {
     "typescript": "^5.7.2"
   },
   "dependencies": {
+    "@faker-js/faker": "^9.3.0",
     "@prisma/client": "^5.22.0",
     "@swc/core": "^1.9.3",
     "@theinternetfolks/context": "^2.1.0",
@@ -27,6 +29,7 @@
     "@types/config": "^3.3.5",
     "@types/cookie-parser": "^1.4.7",
     "@types/express": "^5.0.0",
+    "@types/faker": "^6.6.11",
     "@types/jsonwebtoken": "^9.0.7",
     "@types/node": "^22.9.3",
     "@types/validator": "^13.12.2",
@@ -35,12 +38,14 @@
     "config": "^3.3.12",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
+    "cross-fetch": "^4.1.0",
     "env-cmd": "^10.1.0",
     "express": "^4.21.1",
     "express-async-errors": "^3.1.1",
     "jsonwebtoken": "^9.0.2",
     "ms": "^2.1.3",
     "prisma": "^5.22.0",
+    "scripty": "^2.1.1",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0",
     "tsx": "^4.19.2",

@@ -15,6 +15,9 @@
             "url": "SQL_URL"
         }
     },
+    "url": {
+        "platform": "PLATFORM_URL"
+    },
     "services": {},
     "authentication": {
         "domain": "DOMAIN",

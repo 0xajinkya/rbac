@@ -16,7 +16,15 @@ const Loader = async () => {
     } catch (ex) {
         logger.instance.error(ex);
     }
-}
+};
+
+const Close = async () => {
+    try {
+        await Database.instance.$disconnect();
+      } catch (e) {
+        logger.instance.error(e);
+      }
+};
 
 export const Database = {
     instance: new PrismaClient(),
@@ -45,5 +53,6 @@ export const Database = {
      * // Logs:
      * // ✅ Prisma: Connected to <database_name> database on <host>.
     */
-    Loader
+    Loader,
+    Close
 }

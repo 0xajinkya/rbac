@@ -2,19 +2,10 @@ import type { IUserCreate, IUserUpdate } from "@interfaces/identity"
 import type { IPrismaOptions } from "@interfaces/prisma"
 import Hash from "@libraries/hash";
 import { helper } from "@libraries/helper";
+import { UserSchema } from "@schema/user";
 import { PlatformError, SchemaValidationError } from "@universe/errors";
 import { Database } from "@universe/loaders/database";
 import { Rules } from "validatorjs";
-
-const UserSchema: Rules = {
-    id: ["string", "required"],
-    first_name: ["string"],
-    last_name: ["string"],
-    email: ["string", "required"],
-    password: ["string", "required"],
-    created_at: ['date'],
-    updated_at: ['date']
-}
 
 const Create = async (data: IUserCreate, options?: IPrismaOptions) => {
     const {
@@ -56,6 +47,7 @@ const Create = async (data: IUserCreate, options?: IPrismaOptions) => {
         email,
         password
     };
+
     helper.isValidSchema(document, UserSchema);
 
     document.password = await Hash.password(password);
@@ -145,7 +137,6 @@ const ListUserToAddInOrganization = async (organization_id: string, options?: IP
         }
     });
     return response;
-
 }
 
 export const UserService = {
@@ -188,5 +179,16 @@ export const UserService = {
      * @returns {Promise<IUser>} - The updated user object.
      */
     Update,
+    /**
+     * Retrieves a list of users who are not already part of the specified organization and are not deleted.
+     * 
+     * @function ListUserToAddInOrganization
+     * @async
+     * @param {string} organization_id - The ID of the organization to check users against.
+     * @param {IPrismaOptions} [options] - Optional configuration for the Prisma query.
+     * @returns {Promise<Array>} - A promise that resolves to an array of users that are eligible to be added to the organization.
+     * 
+     * @throws {PlatformError} - Throws an error if no eligible users are found or if the query fails.
+     */
     ListUserToAddInOrganization
 }

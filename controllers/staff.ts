@@ -12,7 +12,7 @@ const Add = async (request: Request, response: Response) => {
         user_id,
         role_id
     } = request.body;
-    const { organization_id, staff } = CoreContext.get<{
+    let { organization_id, staff } = CoreContext.get<{
         organization_id: string;
         staff: IStaff & {
             role: {
@@ -21,6 +21,10 @@ const Add = async (request: Request, response: Response) => {
             }
         }
     }>();
+
+    if(!organization_id){
+        organization_id = request.body.organization_id;
+    }
 
     if (role_id === RoleNameFromKey["super_admin"] || role_id === RoleNameFromKey["admin"]) {
         if (staff.role.name !== RoleNameFromKey["super_admin"]) {

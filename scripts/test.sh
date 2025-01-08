@@ -1,0 +1,1 @@
+./scripts/stop-test.sh && ./scripts/startall-test.sh

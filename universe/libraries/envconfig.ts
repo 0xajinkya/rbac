@@ -15,6 +15,9 @@ export interface EnvConfig {
             url: string;
         }
     },
+    url: {
+        platform: string;
+    },
     // services: {}, //To store env variable for any third party services, if used any in this project
     authentication: {
         domain: string;

@@ -1,4 +1,6 @@
 import { Mandatory } from "@interfaces/common";
+import { IOrganization, IRole, IUser } from "@interfaces/identity";
+import { IStaff } from "@interfaces/identity/staff";
 import { blog, blog_comment, blog_review } from "@prisma/client";
 
 export type IBlog = blog;
@@ -24,3 +26,21 @@ export type IBlogReviewInput = Omit<Mandatory<IBlogReview, "review" | "blog_id">
 export type IBlogReviewCreate = Omit<Mandatory<IBlogReview, "review" | 'id' | 'created_at' | 'updated_at' | "blog_id" | "created_by_staff_id">, 'deleted'>;
 
 export type IBlogReviewUpdate = Partial<Omit<IBlogReview, 'id' | 'created_at' | 'updated_at' | "blog_id" | "created_by_staff_id">>; 
+
+export type IBlogWithCreatedByStaffAndOrg = IBlog & {
+    created_by_staff: IStaff & {
+        user: IUser | null
+        role: IRole | null;
+    };
+    organization: IOrganization | null;
+}
+
+export type IBlogCommentWithCreatedByUserAndBlog = IBlogComment & {
+    created_by_user: IUser | null;
+    blog: IBlog | null;
+}
+
+export type IBlogReviewWithCreatedByUserAndBlog = IBlogReview & {
+    created_by_staff: IStaff | null;
+    blog: IBlog | null;
+}

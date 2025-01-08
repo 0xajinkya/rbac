@@ -10,6 +10,7 @@ import { Database } from "@universe/loaders/database";
 import { AuthHelperService } from "./auth-helper";
 import { Prisma } from "@prisma/client";
 import { ContextService } from "./context";
+import { StaffSchema } from "@schema/organization";
 
 const Get = async (id: string, options?: IPrismaOptions) => {
     const transaction = await Database.getTransaction(options);
@@ -42,8 +43,17 @@ const Add = async ({ userId, roleId, organizationId }: { userId: string, roleId:
             value: userId
         })
     }
-    const organization = await OrganizationService.Get(organizationId, options);
+    let organization = await OrganizationService.Get(organizationId, options);
     if (!organization) {
+        if (user?.active_organization_id) {
+            organization = await OrganizationService.Get(user.active_organization_id, options);
+            if (!organization) {
+                throw new PlatformError("ResourceNotFound", {
+                    resource: "Organization",
+                    value: user.active_organization_id
+                })
+            }
+        }
         throw new PlatformError("ResourceNotFound", {
             resource: "Organization",
             value: organizationId
@@ -74,6 +84,9 @@ const Add = async ({ userId, roleId, organizationId }: { userId: string, roleId:
         created_at: new Date(),
         updated_at: new Date()
     };
+
+    helper.isValidSchema(document, StaffSchema);
+
     const staff = await transaction.staff.create({
         data: document,
         include: {
@@ -211,7 +224,43 @@ export const StaffService = {
      * @returns {Promise<IStaff | null>} - The staff member details or null if not found.
     */
     Get,
+    /**
+     * Retrieves a list of staff members based on the provided query parameters.
+     * 
+     * @function List
+     * @async
+     * @param {Object} params - The query parameters for filtering and pagination.
+     * @param {Prisma.staffWhereInput} [params.where] - Optional filter criteria for the staff records.
+     * @param {Prisma.staffInclude} [params.include] - Optional related data to include in the query.
+     * @param {Prisma.staffOrderByWithAggregationInput} [params.order] - Optional sorting order for the results.
+     * @param {number} [params.limit=10] - The number of staff records to retrieve.
+     * @param {number} [params.skip=0] - The number of staff records to skip (for pagination).
+     * @param {IPrismaOptions} [options] - Optional configuration for the Prisma query.
+     * @returns {Promise<Array>} - A promise that resolves to an array of staff records.
+     */
     List,
+    /**
+     * Deletes a staff member by marking them as deleted.
+     * 
+     * @function Delete
+     * @async
+     * @param {string} identifier - The ID of the staff member to delete.
+     * @param {IPrismaOptions} [options] - Optional configuration for the Prisma query.
+     * @returns {Promise<Object>} - A promise that resolves to the updated staff record after being marked as deleted.
+     * 
+     * @throws {PlatformError} - Throws a PlatformError if the staff member is not found.
+     */
     Delete,
+    /**
+     * Retrieves the staff member associated with the current session and active organization.
+     * 
+     * @function GetMe
+     * @async
+     * @param {IPrismaOptions} [options] - Optional configuration for the Prisma query.
+     * @returns {Promise<Object>} - A promise that resolves to the staff record associated with the current session's organization.
+     * 
+     * @throws {PlatformError} - Throws a PlatformError with the message "NotAllowedAccess" if the active organization is not set in the session.
+     * @throws {PlatformError} - Throws a PlatformError with the message "ResourceNotFound" if the staff member is not found in the organization.
+     */
     GetMe
 }

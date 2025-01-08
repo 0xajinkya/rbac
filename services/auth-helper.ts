@@ -91,8 +91,44 @@ const get = (): TCommonUser => {
 
 export const AuthHelperService = {
     cookieKeys,
+    /**
+     * Retrieves access and refresh tokens from the request and response objects.
+     * 
+     * @function getTokens
+     * @param {Request} request - The request object to extract cookies from.
+     * @param {Response} response - The response object containing local variables.
+     * @returns {Object} - An object containing the access_token and refresh_token, or null if they are not found.
+     * 
+     * @throws {Error} - Throws an error if the access_token or refresh_token is invalid.
+     */
     getTokens,
+    /**
+     * Sets the session context with the provided access token and refresh token.
+     * 
+     * @function setSession
+     * @param {Object} tokens - An object containing the access_token and an optional refresh_token.
+     * @param {string} tokens.access_token - The JWT access token.
+     * @param {string} [tokens.refresh_token] - The optional JWT refresh token.
+     * @returns {Object} - The payload content of the JWT.
+     * 
+     * @throws {Error} - Throws an error if the access token is invalid.
+     */
     setSession,
+    /**
+     * Retrieves the session user data from the context.
+     * 
+     * @function get
+     * @returns {TCommonUser} - The user data from the session.
+     * 
+     * @throws {PlatformError} - Throws a PlatformError if the user is not signed in.
+     */
     get,
+    /**
+     * Retrieves the organization ID from the request's headers.
+     * 
+     * @function getOrganizationId
+     * @param {Request} request - The request object containing the headers.
+     * @returns {string | null} - The organization ID from the request's headers, or null if not found.
+     */
     getOrganizationId
 }

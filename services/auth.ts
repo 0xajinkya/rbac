@@ -278,6 +278,15 @@ export const AuthService = {
      * @returns {Response} - The response object with cookies cleared.
     */
     clearCookie,
-
+    /**
+     * Retrieves the current user's details using the provided session data.
+     * 
+     * @function GetMe
+     * @async
+     * @param {ICommonUser} session - The session object containing the user's information, specifically the user ID.
+     * @returns {Promise<IUser>} - A promise that resolves to the user's details.
+     * 
+     * @throws {PlatformError} - Throws a PlatformError if the user is not found in the database.
+     */
     GetMe
 }

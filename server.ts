@@ -19,7 +19,11 @@ export const Server = async () => {
     const app = express();
 
     // Load application dependencies and configurations.
-    AppLoader({ app }).catch((e) => logger.instance.error(e));
+    try {
+        AppLoader({ app })
+    } catch (error) {
+        logger.instance.error(error);
+    }
 
     /**
      * @route GET /

@@ -1,4 +1,5 @@
 import { staff } from "@prisma/client";
+import { IUser } from "./user";
 
 export type IStaff = staff;
 
@@ -12,3 +13,7 @@ export type IStaffWithoutOptionalFields = Omit<
 >;
 
 export type IStaffUpdate = Pick<staff, "role_id">;
+
+export type IStaffWithUser = IStaff & {
+    user: IUser | null
+}

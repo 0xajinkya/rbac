@@ -13,5 +13,13 @@ const GetSession = () => {
   };
 
 export const ContextService = {
+  /**
+   * Retrieves the current session from the context.
+   * 
+   * @function GetSession
+   * @returns {TCommonUser} - The session object containing the user's data.
+   * 
+   * @throws {PlatformError} - Throws a PlatformError if no session is found.
+   */
     GetSession
 }

@@ -8,6 +8,7 @@ import { PlatformError } from "@universe/errors";
 import { Database } from "@universe/loaders/database";
 import { CommentService } from "./comment";
 import { Prisma } from "@prisma/client";
+import { BlogSchema, UpdateBlogSchema } from "@schema/blog";
 
 const Create = async (data: IBlogInput, options?: IPrismaOptions & { published?: boolean }) => {
     const {
@@ -28,6 +29,8 @@ const Create = async (data: IBlogInput, options?: IPrismaOptions & { published?:
         created_by_staff_id: staff.id,
         published: options?.published ? true : false,
     }
+
+    helper.isValidSchema(document, BlogSchema);
 
     const result = await (await Database.getTransaction(options)).blog.create({
         data: document,
@@ -170,6 +173,8 @@ const Update = async (identifier: string, data: IBlogUpdate, options?: IPrismaOp
     if (typeof deleted !== 'undefined') {
         document.deleted = deleted;
     }
+
+    helper.isValidSchema(document, UpdateBlogSchema);
 
     const response = await transaction.blog.update({
         where: {

@@ -70,6 +70,11 @@ Follow these steps to set up the project and run it locally:
 	-   Run the development server:
 		    -   `bun dev`
 
+### Running Tests Locally
+1. **This does everything**
+	-   Run the command:
+		    -   `bun run test`
+
 ## API Endpoints
 
 The project includes a comprehensive set of API endpoints to interact with the system's features, including user management, organization management, RBAC (role-based access control), and more.

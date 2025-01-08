@@ -41,9 +41,12 @@
       "@services/*": [
         "services/*"
       ],
+      "@schema/*": [
+        "universe/schema/*"
+      ],
       "@universe/*": [
         "universe/*"
-      ]
+      ],
     }
   },
   "exclude": ["node_modules", "dist"],

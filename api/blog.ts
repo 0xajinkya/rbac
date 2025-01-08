@@ -62,7 +62,7 @@ BlogRouter.delete(
     "/:id/delete",
     [
         AuthHandlerMiddleware(),
-        ScopeHandlerMiddleware(scopes.blog.publish)
+        ScopeHandlerMiddleware(scopes.blog.delete)
     ],
     //@ts-ignore
     BlogController.Delete

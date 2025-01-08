@@ -98,6 +98,7 @@ const Delete = async (request: Request, response: Response) => {
         }
     })
 };
+
 const Comment = async (request: Request, response: Response) => {
     const {
         id
@@ -201,7 +202,7 @@ export const BlogController = {
      * @throws {PlatformError} - Throws an error if publication fails.
     */
     Publish,
-    
+
     /**
      * Unpublishes a blog post by its ID.
      * 
@@ -274,5 +275,16 @@ export const BlogController = {
      * @throws {PlatformError} - Throws an error if the blog is not found.
     */
     Get,
+    /**
+     * Deletes a blog post by its ID.
+     * 
+     * @function Delete
+     * @async
+     * @param {Request} request - The request object containing the blog ID in the params.
+     * @param {Response} response - The response object to send the result back to the client.
+     * @returns {Response} - A JSON response indicating the success of the deletion.
+     * 
+     * @throws {PlatformError} - Throws an error if the blog deletion fails or if the blog is not found.
+     */
     Delete
 }
